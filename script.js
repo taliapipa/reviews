@@ -36,15 +36,16 @@ const info = document.getElementById("info");
 
 const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
+const surBtn = document.querySelector(".surprise-btn");
 
 let currentItem = 0;
 
 window.addEventListener("DOMContentLoaded", function() {
-    showPerson(currentItem);
+    showPerson();
 })
 
-function showPerson(person){
-    const item = reviews[person];
+function showPerson(){
+    const item = reviews[currentItem];
     img.src = item.img;
     author.textContent = item.name;
     job.textContent = item.job;
@@ -53,10 +54,23 @@ function showPerson(person){
 
 nextBtn.addEventListener("click", function() {
     currentItem++;
-    showPerson(currentItem)
+    if (currentItem > reviews.length - 1){
+        currentItem = 0
+    }
+    showPerson()
 })
 
 prevBtn.addEventListener("click", function() {
     currentItem--;
-    showPerson(currentItem)
+    if (currentItem < 0){
+        currentItem = reviews.length - 1;
+    }
+    showPerson()
 })
+
+surBtn.addEventListener("click", function() {
+    currentItem = Math.floor(Math.random() * reviews.length);
+    showPerson()
+})
+
+
